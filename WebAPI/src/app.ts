@@ -48,3 +48,16 @@ app.post("/swgames", (req: express.Request, res: express.Response) => {
       res.send(rows);
     });
 });
+
+// 全件削除
+app.delete("/swgames", (req: express.Request, res: express.Response) => {
+  connection()
+    .then((connection) => {
+      const result = connection.query("TRUNCATE TABLE score_ranking");
+      connection.end();
+      return result;
+    })
+    .then(function(rows) {
+      res.send(rows);
+    });
+});
